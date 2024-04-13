@@ -1,11 +1,15 @@
 import openai
 
-openai.api_key = "asst_ZxuSXrdv3sMvGlwp5P0GY3ms"
+openai.api_key = 'your-api-key'
 
-def get_response_from_gpt(question):
-    response = openai.Completion.create(
-        model="gpt-3.5-turbo-0125",  # Replace with the model you're using
-        prompt=question,
-        max_tokens=150
-    )
-    return response.choices[0].text.strip()  # Adjust based on the actual response format
+def get_response(question):
+    try:
+        response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=question,
+            max_tokens=150
+        )
+        return response.choices[0].text.strip()
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return "There was an error processing your request."

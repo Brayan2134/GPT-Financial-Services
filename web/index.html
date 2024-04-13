@@ -29,7 +29,7 @@
         $('#user-input').val('');
         // Send the user input to the server using AJAX
         $.ajax({
-          url: 'http://localhost:5000/ask', // Adjust if you have a different port or host
+          url: 'http://localhost:5000/ask',
           type: 'POST',
           contentType: 'application/json',
           data: JSON.stringify({ question: userInput }),
@@ -39,12 +39,14 @@
             $('#chat-log').append('<div class="my-2"><strong>ChatGPT:</strong> ' + response.answer + '</div>');
             // Scroll to the bottom of the chat log
             $('#chat-log').scrollTop($('#chat-log')[0].scrollHeight);
+          },
+          error: function(xhr, status, error) {
+            // Handle errors here
+            console.error("AJAX Error: " + status + error);
           }
         });
       });
     });
-
-
   </script>
 </body>
 </html>

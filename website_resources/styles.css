@@ -1,3 +1,11 @@
+.disabled {
+    color: #343a40 !important; /* Dark grey color; adjust as needed */
+    opacity: 0.4;
+    text-decoration: line-through; /* Strikethrough effect */
+    pointer-events: none; /* Prevents clicking */
+    cursor: not-allowed; /* Shows a 'not-allowed' cursor on hover */
+}
+
 /* Styles for the chat container */
 #chat-log {
     width: 100%;
@@ -101,8 +109,8 @@
   }
   
   .typing-indicator .dot {
-    width: 14px; /* Increase the width for a bigger circle */
-    height: 14px; /* Increase the height for a bigger circle */
+    width: 18px; /* Increase the width for a bigger circle */
+    height: 18px; /* Increase the height for a bigger circle */
     margin: 0 4px; /* Add space between the dots */
     background-color: #fff;
     border-radius: 50%;

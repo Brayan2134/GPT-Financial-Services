@@ -17,6 +17,12 @@ Session(app)
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
+@app.route('/reset_session', methods=['POST'])
+def reset_session():
+    session.clear()  # This clears all data in the session
+    return 'Session cleared', 200
+
+
 @app.route('/ask', methods=['POST'])
 def ask():
     try:

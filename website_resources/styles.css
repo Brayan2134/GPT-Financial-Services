@@ -80,3 +80,38 @@
 #chat-log::-webkit-scrollbar-thumb:hover {
     background-color: #a0a0a0;
 }
+
+.typing-indicator {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+}
+
+.typing-indicator .bubble {
+    display: flex;
+    justify-content: space-around;
+    padding: 5px 20px;
+    background-color: #59c5f9; /* Replace with your GPT message color */
+    border-radius: 23px;
+    align-items: center;
+    margin-left: auto; /* Aligns the bubble to the right */
+  }
+  
+  .typing-indicator .dot {
+    width: 14px; /* Increase the width for a bigger circle */
+    height: 14px; /* Increase the height for a bigger circle */
+    margin: 0 4px; /* Add space between the dots */
+    background-color: #fff;
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: dotFlashing 1.5s infinite;
+  }
+  
+  /* The keyframes animation to create the flashing effect */
+  @keyframes dotFlashing {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }

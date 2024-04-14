@@ -20,8 +20,18 @@ def ask():
 
         # Create a chat completion using the client instance
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "user", "content": user_input}]
+            model="gpt-4",
+            messages=[
+                # Prompt for GPT API to give responses as if it was a financial advisor.
+                {"role": "system", "content": "You are a seasoned financial advisor employed by a large, prestigious "
+                                              "financial corporation. Your role is to provide technical financial "
+                                              "advice that is accurate and informed, yet easy for clients to "
+                                              "understand. Utilize your expertise to deliver recommendations that are "
+                                              "detailed and well-substantiated, ensuring they meet high standards of "
+                                              "professionalism and are accessible to clients without specialized "
+                                              "financial knowledge."},
+                {"role": "user", "content": user_input}
+            ]
         )
 
         # Access the content of the message directly

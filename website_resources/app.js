@@ -16,10 +16,18 @@ $(document).ready(function() {
     $('#acceptTerms').click(function() {
         $('#termsMessage').remove();
         $('#chat-log').append('<div class="alert alert-success"><i class="fas fa-check-circle"></i> Thank you for accepting the terms!</div>');
-        setTimeout(function() { $('.alert-success').fadeOut('slow', function() { $(this).remove(); }); }, 5000);
+        setTimeout(function() { 
+            $('.alert-success').fadeOut('slow', function() { 
+                $(this).remove(); 
+                // After the thank you message fades out, display the welcome message
+                $('#chat-log').append('<div class="chat-message gpt-message"><span>Hello and welcome to GPT Financial Services, how can I help you?</span></div>');
+                $('#chat-log').scrollTop($('#chat-log')[0].scrollHeight);
+            }); 
+        }, 500);  // Delay for the welcome message can be adjusted here
         $('#submit-question').prop('disabled', false);
         $('#user-input').prop('disabled', false);
     });
+    
 
     // Handle the send button click
     $('#submit-question').click(function() {
@@ -39,7 +47,7 @@ $(document).ready(function() {
                 },
                 error: function(xhr, status, error) {
                     $('#typing-indicator').hide();
-                    addMessage("Error connecting to server.", 'gpt');
+                    addMessage("Error connecting to server. Please try again later or refresh the page!", 'gpt');
                 }
             });
         }

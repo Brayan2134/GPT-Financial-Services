@@ -91,7 +91,7 @@
 
 .typing-indicator {
     position: sticky;
-    bottom: 0;
+    margin-bottom: 0;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -101,16 +101,16 @@
 .typing-indicator .bubble {
     display: flex;
     justify-content: space-around;
-    padding: 5px 20px;
+    padding: 10px;
     background-color: #59c5f9; /* Replace with your GPT message color */
-    border-radius: 23px;
+    border-radius: 20px;
     align-items: center;
     margin-left: auto; /* Aligns the bubble to the right */
   }
   
   .typing-indicator .dot {
-    width: 18px; /* Increase the width for a bigger circle */
-    height: 18px; /* Increase the height for a bigger circle */
+    width: 14px; /* Increase the width for a bigger circle */
+    height: 14px; /* Increase the height for a bigger circle */
     margin: 0 4px; /* Add space between the dots */
     background-color: #fff;
     border-radius: 50%;

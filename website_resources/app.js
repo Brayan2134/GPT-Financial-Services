@@ -77,9 +77,22 @@ $(document).ready(function() {
     function addMessage(text, sender) {
         $('#typing-indicator').hide();
         var messageClass = sender === 'user' ? 'user-message' : 'gpt-message';
+
+        // Parse markdown-like bold syntax "**text**" and replace with "<strong>text</strong>"
+        text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Parse markdown-like italic syntax "*text*" and replace with "<em>text</em>"
+        // Make sure not to confuse with the bold syntax, hence the negative lookbehind and lookahead
+        text = text.replace(/(?<!\*)\*(?!\*)\s*([^*]+?)\s*\*(?!\*)/g, '<em>$1</em>');
+
+        // Construct the message HTML
         var messageHTML = '<div class="chat-message ' + messageClass + '"><span>' + text + '</span></div>';
+
+        // Append the message and re-append the typing indicator
         $('#chat-log').append(messageHTML);
         $('#chat-log').append($('#typing-indicator'));
+
+        // Scroll to the latest message
         $('#chat-log').scrollTop($('#chat-log')[0].scrollHeight);
     }
 

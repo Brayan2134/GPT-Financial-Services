@@ -1,13 +1,19 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 from openai import OpenAI
+from flask_session import Session
 
 # Initialize the Flask application
 app = Flask(__name__)
 CORS(app)
 
-# Initialize the OpenAI client with the  API key from the environment
+# Session configuration for storing conversation history
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
+
+# Initialize the OpenAI client with the API key from the environment
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
@@ -18,24 +24,33 @@ def ask():
         data = request.json
         user_input = data.get('question')
 
-        # Create a chat completion using the client instance
-        response = client.chat.completions.create(
-            model="gpt-4",
-            messages=[
-                # Prompt for GPT API to give responses as if it was a financial advisor.
+        # Initialize or retrieve conversation history from the session
+        if 'history' not in session:
+            session['history'] = [
                 {"role": "system", "content": "You are a seasoned financial advisor employed by a large, prestigious "
                                               "financial corporation. Your role is to provide technical financial "
                                               "advice that is accurate and informed, yet easy for clients to "
                                               "understand. Utilize your expertise to deliver recommendations that are "
                                               "detailed and well-substantiated, ensuring they meet high standards of "
                                               "professionalism and are accessible to clients without specialized "
-                                              "financial knowledge."},
-                {"role": "user", "content": user_input}
+                                              "financial knowledge."}
             ]
+
+        # Append the new user message to the history
+        session['history'].append({"role": "user", "content": user_input})
+
+        # Create a chat completion using the client instance
+        context_to_send = session['history'][-25:]  # Limiting to last 25 interactions
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",  # Note: Consider using gpt-4-turbo if applicable???
+            messages=context_to_send
         )
 
         # Access the content of the message directly
         assistant_message = response.choices[0].message.content
+
+        # Append the assistant's response to the history
+        session['history'].append({"role": "assistant", "content": assistant_message})
 
         # Return the response as JSON
         return jsonify({'answer': assistant_message})

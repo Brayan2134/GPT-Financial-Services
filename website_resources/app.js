@@ -76,7 +76,7 @@ $(document).ready(function() {
     // Function to add messages to the chat log
     function addMessage(text, sender) {
         $('#typing-indicator').hide();
-        var messageClass = sender === 'user' ? 'user-message' : 'gpt-message';
+        var messageClass = sender === 'user' ? 'user-message' : 'gpt-message fade-in';
 
         // Parse markdown-like bold syntax "**text**" and replace with "<strong>text</strong>"
         text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');

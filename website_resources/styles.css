@@ -132,3 +132,36 @@
 .fade-in {
     animation: fadeIn 1s ease-in;
 }
+
+@media (max-width: 767px) {
+    .fixed-bottom-mobile {
+        position: fixed;
+        align-items: center;
+        bottom: 0;
+        padding: auto;
+        z-index: 1030;
+        width: 92%;
+    }
+  
+    #chat-log {
+        margin-bottom: 3vh; /* This should be the height of your input group */
+    }
+  
+    body, html {
+        height: 100%;
+    }
+  
+    .container {
+        height: calc(100% - 100px); /* 56px is the height of the navbar, adjust if your navbar is a different height */
+        display: flex;
+        flex-direction: column;
+    }
+  
+    #chat-log {
+        flex-grow: 1;
+        overflow-y: auto;
+        height: unset;
+        margin-bottom: 0; /* Reset margin-bottom because we're now using flexbox */
+    }
+  }
+  

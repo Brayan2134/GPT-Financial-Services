@@ -86,7 +86,7 @@ $(document).ready(function() {
             setTimeout(function() {
                 // Simulate a slight delay then send the input to the server via AJAX.
                 $.ajax({
-                    url: 'http://localhost:5000/ask',
+                    url: '/ask',
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify({ question: userInput }),

@@ -5,7 +5,7 @@ from openai import OpenAI
 from flask_session import Session
 
 # Initialize the Flask application
-app = Flask(__name__, static_folder='website_resources')
+app = Flask(__name__, static_url_path='', static_folder='website_resources')
 CORS(app)
 
 
@@ -75,5 +75,6 @@ def ask():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True, port=int(os.environ.get("PORT", 5000)))
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
     # app.run(debug=True)  # Debug mode should only be used for development

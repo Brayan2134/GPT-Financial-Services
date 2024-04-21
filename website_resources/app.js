@@ -91,6 +91,7 @@ $(document).ready(function() {
             if (messageText.trim() === '') return;
             var messageHTML = '<div class="chat-message ' + messageClass + '"><span>' + messageText + '</span></div>';
             $('#chat-log').append(messageHTML);
+            $('#chat-log').append($('#typing-indicator'));
             $('#chat-log').scrollTop($('#chat-log')[0].scrollHeight);
         }
         var segments = text.split(/(\d+\.\s*\*{0,2}[^*]+?\*{0,2}\s*:)/).filter(Boolean);

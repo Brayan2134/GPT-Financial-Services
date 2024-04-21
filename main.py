@@ -5,7 +5,7 @@ from openai import OpenAI
 from flask_session import Session
 
 # Initialize the Flask application
-app = Flask(__name__, static_url_path='', static_folder='website_resources')
+app = Flask(__name__, static_url_path='./', static_folder='website_resources')
 CORS(app)
 
 

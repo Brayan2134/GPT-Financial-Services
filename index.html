@@ -36,25 +36,38 @@
 
 
   <div class="container">
-    <h1 class="text-center">GPT Financial Services</h1>
-    <div id="chat-log" class="border rounded p-3 mb-3" style="height: 300px; overflow-y: scroll;">
-      <!-- Conversation logs will appear here -->
-      <!-- ... existing messages ... -->
-      <div id="typing-indicator" class="typing-indicator" style="display: none;">
-        <div class="bubble">
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
+    <div class="row">
+      <div class="col-12">
+        <h1 class="text-center">GPT Financial Services</h1>
+        <div id="chat-log" class="border rounded p-3 mb-3" style="height: 300px; overflow-y: scroll;">
+          <!-- Conversation logs will appear here -->
+          <div id="typing-indicator" class="typing-indicator" style="display: none;">
+            <div class="bubble">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+          </div>
         </div>
       </div>
-  </div>
-    <div class="input-group mb-3 fixed-bottom-mobile">
-      <input type="text" id="user-input" class="form-control" placeholder="Ask something...">
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button" id="submit-question">Send</button>
+      <div class="col-12">
+        <div class="input-group mb-3 fixed-bottom-mobile">
+          <input type="text" id="user-input" class="form-control" placeholder="Ask something...">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="submit-question">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row d-block d-sm-none d-md-block"> <!-- Only display on md and larger devices -->
+      <div class="col-md-6">
+        <div id="detail-view">
+          <!-- Detailed content will be dynamically inserted here -->
+        </div>
       </div>
     </div>
   </div>
+  
 
 </body>
 </html>

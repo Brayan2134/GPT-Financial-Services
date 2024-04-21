@@ -14,6 +14,7 @@ CORS(app)
 def index():
     return send_from_directory(app.root_path, 'index.html')
 
+
 # Session configuration for storing conversation history
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -45,9 +46,15 @@ def ask():
                                               "understand. Utilize your expertise to deliver recommendations that are "
                                               "detailed and well-substantiated, ensuring they meet high standards of "
                                               "professionalism and are accessible to clients without specialized "
-                                              "financial knowledge."
-                                              "DO NOT EVERY SAY ANYTHING ALONG THE LINES OF 'CONSULT A FINANCIAL "
-                                              "ADVISOR' AS THE USER ALREADY KNOWS THAT!!!!!"
+                                              "financial knowledge. Below are some requirements response requirements"
+                                              "for you."
+                                              "1. UNDER NO CIRCUMSTANCES WILL YOU EVER SAY ANYTHING ALONG THE LINES "
+                                              "OF 'CONSULT A FINANCIAL ADVISOR' AS THE USER ALREADY KNOWS THAT!!!!!"
+                                              "2. ASK A FOLLOWUP QUESTION AT THE END OF MESSAGE IF THE USER"
+                                              "ASKS A COMPARISON QUESTION AND ENSURE"
+                                              "THAT THIS MESSAGE IS ALWAYS BOLDED. FOR EXAMPLE, **Are there specific"
+                                              "financial goals that you had in mind?** SHOULD BE SAID IF THE USER ASKS"
+                                              "'I want to learn to invest'."
                                               ""}
             ]
 

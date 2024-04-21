@@ -5,8 +5,21 @@ from openai import OpenAI
 from flask_session import Session
 
 # Initialize the Flask application
-app = Flask(__name__, static_folder='website_resources')
+app = Flask(__name__, static_folder='website_resources', static_url_path='/static')
 CORS(app)
+
+
+# Serve your main page
+@app.route('/')
+def index():
+    return send_from_directory(app.root_path, 'index.html')
+
+
+# Handle requests for static files
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory(app.static_folder, path)
+
 
 # Session configuration for storing conversation history
 app.config["SESSION_PERMANENT"] = False
@@ -15,15 +28,6 @@ Session(app)
 
 # Initialize the OpenAI client with the API key from the environment
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-
-
-# Serving your SPA
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def catch_all(path):
-    if path and os.path.exists(os.path.join(app.static_folder, path)):
-        return send_from_directory(app.static_folder, path)
-    return send_from_directory(app.static_folder, 'index.html')
 
 
 @app.route('/reset_session', methods=['POST'])
@@ -80,4 +84,4 @@ def ask():
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
-    #app.run(debug=True)  # Debug mode should only be used for development
+    # app.run(debug=True)  # Debug mode should only be used for development

@@ -104,8 +104,33 @@ $(document).ready(function() {
             return;
         } else {
             $('#chat-log').empty(); // Clear the chat log
-            $(this).addClass('disabled'); // Disable the link after clearing the chat
-            $('#chat-log').append('<div class="chat-message gpt-message"><span>Hello and welcome to GPT Financial Services, how can I help you?</span></div>');
+            $(this).addClass('disabled'); // Re-disable the link after clearing the chat
+
+            // Initially disable the send button, input field, and clear conversation link
+            $('#submit-question').prop('disabled', true);
+            $('#user-input').prop('disabled', true);
+            $('#clear-conversation').addClass('disabled');
+
+            // Insert terms acceptance message into the conversation box with full width
+            $('#chat-log').append(`
+                <div id="termsMessage" class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Please accept our terms to use this service for entertainment purposes only.</span>
+                    <button id="acceptTerms" class="btn btn-primary">Accept</button>
+                </div>
+            `);
+
+            // Handle acceptance of terms and update message
+            $('#acceptTerms').click(function() {
+                $('#termsMessage').remove();
+                $('#submit-question').prop('disabled', false);
+                $('#user-input').prop('disabled', false);
+                $('#clear-conversation').removeClass('disabled');
+
+                // Append default welcome message only after terms are accepted
+                $('#chat-log').append('<div class="chat-message gpt-message"><span>Hello and welcome to GPT Financial Services, how can I help you?</span></div>');
+                $('#chat-log').scrollTop($('#chat-log')[0].scrollHeight);
+            });
         }
     });
 });

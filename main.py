@@ -1,11 +1,11 @@
 import os
-from flask import Flask, request, jsonify, session
+from flask import Flask, request, jsonify, session, send_from_directory
 from flask_cors import CORS
 from openai import OpenAI
 from flask_session import Session
 
 # Initialize the Flask application
-app = Flask(__name__)
+app = Flask(__name__, static_folder='website_resources')
 CORS(app)
 
 # Session configuration for storing conversation history
@@ -15,6 +15,15 @@ Session(app)
 
 # Initialize the OpenAI client with the API key from the environment
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+
+# Serving your SPA
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    if path and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    return send_from_directory(app.static_folder, 'index.html')
 
 
 @app.route('/reset_session', methods=['POST'])

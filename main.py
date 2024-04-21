@@ -5,7 +5,7 @@ from openai import OpenAI
 from flask_session import Session
 
 # Initialize the Flask application
-app = Flask(__name__, static_folder='website_resources', static_url_path='/static')
+app = Flask(__name__, static_folder='website_resources')
 CORS(app)
 
 
@@ -13,13 +13,6 @@ CORS(app)
 @app.route('/')
 def index():
     return send_from_directory(app.root_path, 'index.html')
-
-
-# Handle requests for static files
-@app.route('/static/<path:path>')
-def send_static(path):
-    return send_from_directory(app.static_folder, path)
-
 
 # Session configuration for storing conversation history
 app.config["SESSION_PERMANENT"] = False
@@ -82,6 +75,5 @@ def ask():
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True, use_reloader=True, port=int(os.environ.get("PORT", 5000)))
     # app.run(debug=True)  # Debug mode should only be used for development

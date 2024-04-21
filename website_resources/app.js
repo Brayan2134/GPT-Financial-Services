@@ -115,25 +115,44 @@ $(document).ready(function() {
         }
     });
 
-    // Function to add messages to the chat log.
-    function addMessage(text, sender) {
-        // Hide the typing indicator before adding a new message.
-        $('#typing-indicator').hide();
-        // Determine the CSS class based on the sender type.
-        var messageClass = sender === 'user' ? 'user-message' : 'gpt-message fade-in';
-        // Replace markdown-like bold and italic syntaxes with HTML tags.
-        text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        text = text.replace(/(?<!\*)\*(?!\*)\s*([^*]+?)\s*\*(?!\*)/g, '<em>$1</em>');
+  // Function to add messages to the chat log.
+function addMessage(text, sender) {
+    // Hide the typing indicator before adding new messages.
+    $('#typing-indicator').hide();
+    // Determine the CSS class based on the sender type.
+    var messageClass = sender === 'user' ? 'user-message' : 'gpt-message fade-in';
+
+    // Function to create a message HTML and append it to the chat log.
+    function appendMessage(messageText) {
+        if (messageText.trim() === '') return; // Skip empty messages
         // Construct the message HTML.
-        var messageHTML = '<div class="chat-message ' + messageClass + '"><span>' + text + '</span></div>';
+        var messageHTML = '<div class="chat-message ' + messageClass + '"><span>' + messageText + '</span></div>';
         // Append the message and the typing indicator to the chat log.
         $('#chat-log').append(messageHTML);
-        $('#chat-log').append($('#typing-indicator'));
+        $('#chat-log').append($('#typing-indicator')); // Keep the typing indicator at the end.
         // Scroll to the latest message.
         $('#chat-log').scrollTop($('#chat-log')[0].scrollHeight);
         // Update local storage to include the new message.
         updateLocalStorage();
     }
+
+    // Split the text into segments for new messages at numbered items and bold/italic text.
+    var segments = text.split(/(\d+\.\s*\*{0,2}[^*]+?\*{0,2}\s*:)/).filter(Boolean);
+
+    // Iterate through segments, styling bold and italic text, and sending as separate messages.
+    segments.forEach(segment => {
+        // Replace **text** with <strong>text</strong> and *text* with <em>text</em>
+        var formattedSegment = segment
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold **text**
+            .replace(/\*(.*?)\*/g, '<em>$1</em>'); // Italic *text*
+        
+        appendMessage(formattedSegment);
+    });
+}
+
+
+
+
 
     // Event handler for the 'Clear conversation' link.
     $('#clear-conversation').click(function(event) {

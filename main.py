@@ -54,9 +54,9 @@ def ask():
                                               "BASED ON THE USER INPUT. FOR EXAMPLE, IF THE USER ASKS "
                                               "'What are stocks and bonds?', YOU SHOULD ASK 'Are you looking "
                                               "to build a portfolio of stocks and bonds?'"
-                                              "THAT THIS MESSAGE IS ALWAYS BOLDED. FOR EXAMPLE, **Are there specific"
-                                              "financial goals that you had in mind?** SHOULD BE SAID IF THE USER ASKS"
-                                              "'I want to learn to invest'."
+                                              "3. THE FOLLOWUP QUESTION MUST ALWAYS BE BOLDED. FOR EXAMPLE, "
+                                              "**Are there specific financial goals that you had in mind?** "
+                                              "SHOULD BE SAID IF THE USER ASKS 'I want to learn to invest'."
                                               ""}
             ]
 

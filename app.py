@@ -39,7 +39,9 @@ def ask():
                                               "understand. Utilize your expertise to deliver recommendations that are "
                                               "detailed and well-substantiated, ensuring they meet high standards of "
                                               "professionalism and are accessible to clients without specialized "
-                                              "financial knowledge."}
+                                              "financial knowledge."
+                                              "DO NOT EVERY SAY ANYTHING ALONG THE LINES OF 'CONSULT A FINANCIAL "
+                                              "ADVISOR' AS THE USER ALREADY KNOWS THAT!!!!!"}
             ]
 
         # Append the new user message to the history

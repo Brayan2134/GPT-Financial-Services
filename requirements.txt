@@ -1,0 +1,4 @@
+Flask==2.0.1
+Flask-Cors==3.0.10
+openai==0.10.3
+Flask-Session==0.4.0
